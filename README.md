@@ -24,3 +24,5 @@ git clone https://github.com/paradojo/laravel-modular-skeleton.git
 * Create you routes.php file 
 * 
 Done
+
+The quick and easy  way is copy the Test Module and rename by you new Modules Name.
