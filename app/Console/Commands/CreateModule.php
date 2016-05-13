@@ -13,7 +13,7 @@ class CreateModule extends Command
      *
      * @var string
      */
-    protected $signature = 'make:module {module_name}';
+    protected $signature = 'modules:generate';
 
     /**
      * The console command description.
@@ -49,26 +49,13 @@ class CreateModule extends Command
      */
     public function handle()
     {
-        $module_dir = app_path($this->modulesDirectoy).DIRECTORY_SEPARATOR.$this->argument('module_name');
+        array_map(function($module){
+            $this->createModule($module);
+        },$modules = config("module.modules"));
 
-        if($this->filesystem->exists($module_dir)){
-            $this->error('Module exists');
-            return false;
-        }
-
-        if($this->filesystem->makeDirectory($module_dir)){
-            array_map(function($directory) use ($module_dir){
-                $this->filesystem->makeDirectory($module_dir.DIRECTORY_SEPARATOR.$directory);
-            },$this->module_structure);
-            File::put($module_dir.DIRECTORY_SEPARATOR.$this->module_routes_file,$this->routesTemplate());
-            $this->info('Module Created');
-
-        }
     }
 
-    private function routesTemplate(){
-
-        $module = $this->argument('module_name');
+    private function routesTemplate($module){
 
         return "<?php
 
@@ -89,4 +76,23 @@ Route::get('/$module', function () {
 ";
     }
 
+    /**
+     * @return bool
+     */
+    private function createModule($module)
+    {
+        $module_dir = app_path($this->modulesDirectoy) . DIRECTORY_SEPARATOR . $module;
+
+        if ($this->filesystem->exists($module_dir)) {
+            
+        }else{
+            if ($this->filesystem->makeDirectory($module_dir)) {
+                array_map(function ($directory) use ($module_dir) {
+                    $this->filesystem->makeDirectory($module_dir . DIRECTORY_SEPARATOR . $directory);
+                }, $this->module_structure);
+                File::put($module_dir . DIRECTORY_SEPARATOR . $this->module_routes_file, $this->routesTemplate($module));
+                $this->info("Module $module Created");
+            }
+        }
+    }
 }
