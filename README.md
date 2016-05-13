@@ -3,6 +3,8 @@ Based in http://kamranahmed.info/blog/2015/12/03/creating-a-modular-application-
 ____
 
 * ModuleServiceProvider is now located at providers directory
+* Added artisan command to generate module skeleton and routes file
+
 
 ## Usage
 
