@@ -11,7 +11,7 @@ ____
 ### Install
 git clone https://github.com/paradojo/laravel-modular-skeleton.git
 
-### Add a module
+### Adding a module
 1. In config/module.php add a new module name
 * return  [
     'modules' => [
