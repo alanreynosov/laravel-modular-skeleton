@@ -18,11 +18,5 @@ git clone https://github.com/paradojo/laravel-modular-skeleton.git
     ]
 ];
 
-2. In your Modules directory (App\Modules), create your new Module
-* Create MyNewModule directoy
-* Insider your MyNewModule directoy, create, Models, Controllers and Views Directories
-* Create you routes.php file 
-* 
+2. run "php artisan modules:generate" 
 Done
-
-The quick and easy  way is copy the Test Module and rename by you new Modules Name.
